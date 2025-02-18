@@ -12,13 +12,15 @@
  - Uncomment the following declarations to complete the implementation, and provide an implementation for instance Show Card
  -}
 
---data Suit = 
---data Digit = 
---data Card = 
+data Suit = Spades | Hearts | Clubs | Diamonds
+  deriving (Eq, Show, Ord, Enum, Bounded)
+data Digit = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King
+  deriving (Eq, Show, Ord, Enum, Bounded)
+data Card = Card Digit Suit
 
 -- We should be able to provide a function which returns the higher ranked card:
 betterCard :: Card -> Card -> Card
-betterCard x y = undefined
+betterCard = max
 
 -- Here is a new Typeclass, which represents some kind of playing hand in a game.
 -- It returns True for a "winning hand", depending on the rules for the type of class we are playing with
@@ -30,7 +32,7 @@ instance Hand Card where
     play c = undefined
 
 -- Create a new Coin type
---data Coin = 
+data Coin = Coin
 
 -- Implement Hand for Coin, where play returns true if there are ten heads in a row in the list
 instance Hand Coin where
