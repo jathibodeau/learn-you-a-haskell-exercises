@@ -19,7 +19,7 @@ fib = reverse . flip take fib' . length . takeWhile ((/= -1) . signum) . iterate
 --			    stepReverseSign -3 1 = 4
 --			    stepReverseSign 1 2 = -3
 stepReverseSign :: (Fractional a, Ord a) => a -> a -> a
-stepReverseSign a b = signum a * (-1) * (abs a + b)
+stepReverseSign a b = negate (signum a) * (abs a + b)
 
 {- Lets calculate pi.
  - The Leibniz formula for pi (http://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80)
