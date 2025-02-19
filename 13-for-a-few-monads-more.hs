@@ -27,9 +27,13 @@
  - 5 is greater than 4
  - 5 is equal to 5
  -}
+import Control.Monad.Writer
 
 describe :: (Show a, Eq a, Ord a) => a -> a -> [String]
-describe x y = undefined
+describe x y = return $ case compare x y of
+  LT -> show x <> " is less than " <> show y
+  EQ -> show x <> " is equal to " <> show y
+  GT -> show x <> " is greater than " <> show y
 
 binarySearch :: (Show a, Ord a, Eq a, Monoid b) => (a -> a -> b) -> a -> [a] -> Writer b Bool
 binarySearch = undefined
