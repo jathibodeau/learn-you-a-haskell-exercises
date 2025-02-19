@@ -12,11 +12,20 @@
  - Uncomment the following declarations to complete the implementation, and provide an implementation for instance Show Card
  -}
 
+import Data.List (group)
+
 data Suit = Spades | Hearts | Clubs | Diamonds
-  deriving (Eq, Show, Ord, Enum, Bounded)
-data Digit = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King
-  deriving (Eq, Show, Ord, Enum, Bounded)
+  deriving (Eq, Show, Enum)
+data Digit = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King | Ace
+  deriving (Eq, Show, Ord, Enum)
 data Card = Card Digit Suit
+
+instance Eq Card where
+  Card x _ == Card y _ = x == y
+instance Ord Card where
+  compare (Card x _) (Card y _) = compare x y
+instance Show Card where
+  show (Card r s) = "The " ++ show r ++ " of " ++ show s
 
 -- We should be able to provide a function which returns the higher ranked card:
 betterCard :: Card -> Card -> Card
@@ -29,13 +38,14 @@ class Hand a where
 
 -- Implement Hand for Card, where play returns true if the list contains the Ace of Spades
 instance Hand Card where
-    play c = undefined
+    play = elem (Card Ace Spades)
 
 -- Create a new Coin type
-data Coin = Coin
+data Coin = Heads | Tails
+  deriving Eq
 
 -- Implement Hand for Coin, where play returns true if there are ten heads in a row in the list
 instance Hand Coin where
-	play c =  undefined
+    play = any (>=10) . fmap length . filter ((== Heads) . head) . group
 
 -- Have a play with implementing Hand for some other types, for instance Int and Bool
