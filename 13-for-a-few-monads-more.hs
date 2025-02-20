@@ -36,7 +36,15 @@ describe x y = return $ case compare x y of
   GT -> show x <> " is greater than " <> show y
 
 binarySearch :: (Show a, Ord a, Eq a, Monoid b) => (a -> a -> b) -> a -> [a] -> Writer b Bool
-binarySearch = undefined
+binarySearch _ _ [] = return False
+binarySearch f v l = do
+  let (l1, (m:l2)) = splitAt n l
+      n = length l `div` 2
+  tell $ f v m
+  case compare v m of
+    LT -> binarySearch f v l1
+    EQ -> return True
+    GT -> binarySearch f v l2
 
 {-
  - Investigate what other functions instead of describe can be passed to the binary search.
