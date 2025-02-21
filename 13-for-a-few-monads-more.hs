@@ -50,3 +50,6 @@ binarySearch f v l = do
  - Investigate what other functions instead of describe can be passed to the binary search.
  - Is it possible to provide a function, so that when we do the binary search we can return a count of how many comparisons the algorithm took?
  -}
+count :: Num c => a -> b -> Sum c
+count _ _ = 1
+
