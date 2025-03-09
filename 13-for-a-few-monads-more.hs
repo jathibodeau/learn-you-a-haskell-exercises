@@ -28,6 +28,7 @@
  - 5 is equal to 5
  -}
 import Control.Monad.Writer
+import Data.Semigroup (Sum, getSum)
 
 describe :: (Show a, Eq a, Ord a) => a -> a -> [String]
 describe x y = return $ case compare x y of

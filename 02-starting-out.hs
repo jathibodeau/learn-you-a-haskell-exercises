@@ -43,7 +43,7 @@ splitAtIndex k l = (take k l, drop k l)
 
 -- Drop the element at index k in list l
 -- For example "dropK 3 [0,0,0,1,0,0,0]" returns [0,0,0,0,0,0]
-dropK k l = (take k l) ++ (tail $ drop k l)
+dropK k l = take k l ++ tail (drop k l)
 
 -- Extract elements between ith and kth element in list l. Including i, but not k
 -- For example, "slice 3 6 [0,0,0,1,2,3,0,0,0]" returns [1,2,3]
